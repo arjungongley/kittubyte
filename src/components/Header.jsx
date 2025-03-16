@@ -23,10 +23,14 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-700 hover:text-primary transition-colors"
+            className="md:hidden text-gray-700 hover:text-primary transition-colors p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
-            {isMenuOpen ? <FaTimes /> : <FaBars />}
+            <span className="sr-only">{isMenuOpen ? "Close menu" : "Open menu"}</span>
+            {isMenuOpen ? <FaTimes aria-hidden="true" /> : <FaBars aria-hidden="true" />}
           </button>
 
           {/* Desktop Navigation */}
@@ -53,7 +57,11 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-gray-100">
+          <nav 
+            id="mobile-menu"
+            className="md:hidden py-4 border-t border-gray-100"
+            aria-label="Mobile navigation"
+          >
             <div className="flex flex-col space-y-4">
               <div className="px-2">
                 <ServiceSearch />
